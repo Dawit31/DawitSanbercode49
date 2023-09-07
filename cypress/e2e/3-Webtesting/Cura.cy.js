@@ -1,6 +1,7 @@
 describe('fitur login', () => {
+  let url='https://katalon-demo-cura.herokuapp.com/'
   it('Login Berhasil', () => { //Test Cases Login Berhasil
-    cy.visit('https://katalon-demo-cura.herokuapp.com/')
+    cy.visit(url)
     cy.get('#menu-toggle > .fa').click()
     cy.get('.sidebar-nav > :nth-child(4) > a').click()
     cy.get('#txt-username').type('John Doe')
@@ -8,7 +9,7 @@ describe('fitur login', () => {
     cy.get('#btn-login').click()
   })
   it('Username Kosong', () => { //Test Cases Login Gagal - Username Kosong
-    cy.visit('https://katalon-demo-cura.herokuapp.com/')
+    cy.visit(url)
     cy.get('#menu-toggle > .fa').click()
     cy.get('.sidebar-nav > :nth-child(4) > a').click()
     cy.get('#txt-username')
@@ -16,7 +17,7 @@ describe('fitur login', () => {
     cy.get('#btn-login').click()
   })
   it('Password Kosong', () => { //Test Cases Login Gagal - Password Kosong
-    cy.visit('https://katalon-demo-cura.herokuapp.com/')
+    cy.visit(url)
     cy.get('#menu-toggle > .fa').click()
     cy.get('.sidebar-nav > :nth-child(4) > a').click()
     cy.get('#txt-username').type('John Doe')
@@ -24,7 +25,7 @@ describe('fitur login', () => {
     cy.get('#btn-login').click()
   })
   it('Username Salah', () => { //Test Cases Login Gagal - Username Salah
-    cy.visit('https://katalon-demo-cura.herokuapp.com/')
+    cy.visit(url)
     cy.get('#menu-toggle > .fa').click()
     cy.get('.sidebar-nav > :nth-child(4) > a').click()
     cy.get('#txt-username').type('Dawit QA')
@@ -32,11 +33,32 @@ describe('fitur login', () => {
     cy.get('#btn-login').click()
   })
   it('Password Salah', () => { //Test Cases Login Gagal - Password Salah
-    cy.visit('https://katalon-demo-cura.herokuapp.com/')
+    cy.visit(url)
     cy.get('#menu-toggle > .fa').click()
     cy.get('.sidebar-nav > :nth-child(4) > a').click()
     cy.get('#txt-username').type('John Doe')
     cy.get('#txt-password').type('Password1')
     cy.get('#btn-login').click()
+  })
+})
+describe('Fitur Make Appoitment', () => {
+  let url='https://katalon-demo-cura.herokuapp.com/'
+  it('berhasil Membuat Appoitment', () => { //Test Cases Berhasil Membuat Appoitment
+    cy.visit(url)
+    cy.get('#menu-toggle > .fa').click()
+    cy.get('.sidebar-nav > :nth-child(4) > a').click()
+    cy.get('#txt-username').type('John Doe')
+    cy.get('#txt-password').type('ThisIsNotAPassword')
+    cy.get('#btn-login').click()
+    cy.get('#btn-make-appointment').click()
+    cy.get('#btn-make-appointment').click()
+    cy.get('#combo_facility').select('Seoul CURA Healthcare Center')
+    cy.get('#chk_hospotal_readmission').check()
+    cy.get('[type="radio"]').first().check()
+    cy.get('.input-group-addon').click()
+    cy.get('tbody > :nth-child(2) > :nth-child(3)').click()
+    //cy.get('textarea').type('test')
+    cy.get('#btn-book-appointment').click()
+    cy.get('.text-center > .btn').click()
   })
 })
